@@ -1,0 +1,38 @@
+<input type='text' id='firstName' placeholder='First Name' />
+<input type='text' id='lastName' placeholder='Last Name' />
+<input type='text' id='email' placeholder='email' />
+<input type='text' id='password' placeholder='password' />
+<input id="admin" type="checkbox" name="admin" value="admin" checked>Admin<br>
+<button id='sub'>Register</button>
+
+<script>
+$(document).ready(function(){
+    
+    document.getElementById('admin').checked = false;
+
+
+    //when button is clicked insert into db
+    document.getElementById("sub").onclick = function(){
+        //ajax
+        $.ajax({
+            url:"../controller/user.php",
+            dataType:"html",
+            type:"POST",
+            data:{
+                method:"insert",
+                username:document.getElementById("email").value,
+                password:document.getElementById("password").value,
+                firstName:document.getElementById("firstName").value,
+                lastName:document.getElementById("lastName").value,
+                admin:document.getElementById("")
+            },
+            success:function(resp){
+                alert("USER CREATED!");
+            }
+        });
+    }
+    
+        
+});
+
+</script>

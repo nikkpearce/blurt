@@ -1,0 +1,35 @@
+<input type='text' id='message' placeholder='Msg your buddies!' />
+<button id='msg_sub'>Send!</button>
+
+<div>
+    <span id='{{myId}}'>{{hello}}</span>
+    <div ng-repeat="msg in msgs">
+        <span>{{msg.username}}</span> : 
+        <span>{{msg.text}}</span>
+        <button ng-click="like(msg.id)">Like!</button> | 
+        <span>{{msg.numLikes}} <img height='25' src='{{showImg(msg.numLikes)}}' /></span>
+    </div>
+</div>
+
+<script>
+        $(document).ready(function(){
+            
+            document.getElementById("msg_sub").onclick = function(){
+                
+                $.ajax({
+                    url:"controller/msg.php",
+                    dataType:"html",
+                    type:"POST",
+                    data:{
+                        method:"insert",
+                        user_id:sessionStorage.myid,
+                        text:document.getElementById("message").value
+                    },
+                    success:function(resp){
+                        
+                    }
+                })
+            }
+        });
+    
+    </script>

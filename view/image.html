@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Gallery</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <body>
+        <input type='text' id='username' placeholder='username' />
+        <input type='text' id='password' placeholder='password' />
+        <button id='sub'>Login</button>
+        
+        <input type='text' id='title' placeholder='Image title' />
+        <input type='text' id='path' placeholder='Image Path' />
+        <button id='image_sub'>Insert Image</button>
+        
+        <div id='display'></div>
+    </body>
+    
+    <script>
+        $(document).ready(function(){
+            
+            var user_id = -1;
+            //when button is clicked insert into db
+            document.getElementById("sub").onclick = function(){
+                //ajax
+                $.ajax({
+                    url:"../controller/user.php",
+                    dataType:"json",
+                    type:"POST",
+                    data:{
+                        method:"login",
+                        username:document.getElementById("username").value,
+                        password:document.getElementById("password").value
+                    },
+                    success:function(resp){
+                        alert("USER Logged in!");
+                        console.log(resp);
+                        user_id = resp[0].id;
+                        
+                        //ajax to read images
+                        $.ajax({
+                            url:"../controller/image.php",
+                            type:"POST",
+                            dataType:"json",
+                            data:{
+                                method:"get_u_images",
+                                user_id:user_id
+                            },
+                            success:function(resp){
+                                console.log(resp);
+                                for(var i = 0; i <resp.length; i++){
+                                    //loop and fill display with images
+                                    var imgs = document.createElement("img");
+                                    imgs.src = resp[i].path;
+                                    imgs.title = resp[i].title;
+                                    imgs.style.height = "100px";
+                                    imgs.style.width = "auto";
+                                    document.getElementById("display").appendChild(imgs);
+                                }
+                            }
+                        });
+                    }
+                });
+            }
+            
+            
+            document.getElementById("image_sub").onclick = function(){
+                $.ajax({
+                    url:"../controller/image.php",
+                    type:"POST",
+                    dataType:"html",
+                    data:{
+                        method:"insert",
+                        title:document.getElementById("title").value,
+                        path:document.getElementById("path").value,
+                        user_id:user_id
+                    },
+                    success:function(resp){
+                        alert("Inserted Image");
+                    }
+                });
+            }
+            
+        });
+    
+    </script>
+</html>

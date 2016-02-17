@@ -1,0 +1,36 @@
+<input type='text' id='username' placeholder='Username' />
+<input type='text' id='password' placeholder='Password' />
+<button id='sub'>Login</button></br></br>
+
+<a href="#/chat">Chat away</a>s
+
+<script>
+        $(document).ready(function(){
+            
+            var user_id = -1;
+            //when button is clicked insert into db
+            document.getElementById("sub").onclick = function(){
+                //ajax
+                $.ajax({
+                    url:"controller/user.php",
+                    dataType:"json",
+                    type:"POST",
+                    data:{
+                        method:"login",
+                        username:document.getElementById("username").value,
+                        password:document.getElementById("password").value
+                    },
+                    success:function(resp){
+                        alert("USER Logged in!");
+                        console.log(resp);
+                        user_id = resp[0].id;
+                        sessionStorage.myid = resp[0].id;
+                    }
+                });
+            }
+            
+           
+            
+        });
+    
+    </script>

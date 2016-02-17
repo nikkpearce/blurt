@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Message Thing</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <body>
+        <input type='text' id='username' placeholder='username' />
+        <input type='text' id='password' placeholder='password' />
+        <button id='sub'>Login</button>
+        
+        <input type='text' id='message' placeholder='Msg your buddies!' />
+        <button id='msg_sub'>Send!</button>
+    </body>
+    
+    <script>
+        $(document).ready(function(){
+            
+            var user_id = -1;
+            //when button is clicked insert into db
+            document.getElementById("sub").onclick = function(){
+                //ajax
+                $.ajax({
+                    url:"../controller/user.php",
+                    dataType:"json",
+                    type:"POST",
+                    data:{
+                        method:"login",
+                        username:document.getElementById("username").value,
+                        password:document.getElementById("password").value
+                    },
+                    success:function(resp){
+                        alert("USER Logged in!");
+                        console.log(resp);
+                        user_id = resp[0].id;
+                        
+                        
+                    }
+                });
+            }
+            
+            document.getElementById("msg_sub").onclick = function(){
+                
+                $.ajax({
+                    url:"../controller/msg.php",
+                    dataType:"html",
+                    type:"POST",
+                    data:{
+                        method:"insert",
+                        user_id:user_id,
+                        text:document.getElementById("message").value
+                    },
+                    success:function(resp){
+                        
+                    }
+                })
+            }
+        });
+    
+    </script>
+</html>

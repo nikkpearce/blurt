@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All images</title>
+    </head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <body>
+        
+    </body>
+    
+    <script>
+        $(document).ready(function(){
+            
+           $.ajax({
+               url:"../controller/image.php",
+               type:"POST",
+               dataType:"json",
+               success:function(resp){
+                   //loop the response and append the images to the body
+               }
+           }) 
+        });
+    </script>
+</html>
