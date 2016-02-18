@@ -10,9 +10,7 @@
 </head>
 <body>
 <input type="text" placeholder="" id="file">
-<input type="text" placeholder="" id="id">
 <input type="text" placeholder="" id="message">
-<input type="text" placeholder="" id="userid">
 <button id="projsub">Submit</button>
 </body>
 
@@ -32,8 +30,10 @@
 						type:"POST",
 						dataType:"json",
 						data:{
-							method:"insert_projects",
-							//userid:userid
+							method:"insert",
+							file:document.getElementById("file").value,
+							message:document.getElementById("message").value,
+							id:document.getElementById("message").value,
 						},
 						success:function(resp){
 							console.log(resp)
@@ -42,6 +42,61 @@
 						
 					});
 
+					// Read Project
+					$.ajax({
+						url:"../controller/projects.php",
+						type:"POST",
+						dataType:"json",
+						data:{
+							method:"insert",
+							file:document.getElementById("file").value,
+							message:document.getElementById("message").value,
+							id:document.getElementById("message").value,
+						},
+						success:function(resp){
+							console.log(resp)
+							
+						}
+						
+					});
+
+
+					// Update Project
+					$.ajax({
+						url:"../controller/projects.php",
+						type:"POST",
+						dataType:"json",
+						data:{
+							method:"insert",
+							file:document.getElementById("file").value,
+							message:document.getElementById("message").value,
+							id:document.getElementById("message").value,
+						},
+						success:function(resp){
+							console.log(resp)
+							
+						}
+						
+					});
+
+
+					// Delete Project
+					$.ajax({
+						url:"../controller/projects.php",
+						type:"POST",
+						dataType:"json",
+						data:{
+							method:"insert",
+							file:document.getElementById("file").value,
+							message:document.getElementById("message").value,
+							id:document.getElementById("message").value,
+						},
+						success:function(resp){
+							console.log(resp)
+							
+						}
+						
+					});
 
 				
 

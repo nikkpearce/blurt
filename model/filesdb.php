@@ -31,11 +31,20 @@ function get_files_by_uid(){
 }
 
 function update_file(){
-    //update info for user
+    
+    global $db;
+    $query = "UPDATE files (file, id) SET files = '".$_POST['file']."' WHERE id = ".$_POST['id']."";
+    $result = $db->query($query);
+    echo json_encode("Updated!");
+
 }
 
 function delete_file(){
-    //delete info for user
+   
+     global $db;
+    $query = "DELETE FROM files (file, id, userid) WHERE id =".$_POST['id']."";
+    $result = $db->query($query);
+    echo json_encode("DELETED");
     
 }
 

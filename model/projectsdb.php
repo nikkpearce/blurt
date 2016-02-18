@@ -30,11 +30,18 @@ function get_projects_by_uid(){
     echo json_encode($result->fetchAll());
 }
 
-function update_file(){
-    //update info for user
+function update_projects(){
+    global $db;
+    $query = "UPDATE projects (file, id, message) SET files = '".$_POST['file']."', message = '".$_POST['message']."' WHERE id = ".$_POST['id']."";
+    $result = $db->query($query);
+    echo json_encode("Updated!");
 }
 
-function delete_file(){
-    //delete info for user
+function delete_projects(){
+    
+    global $db;
+    $query = "DELETE FROM projects WHERE id =".$_POST['id']."";
+    $result = $db->query($query);
+    echo json_encode("DELETED");
     
 }
